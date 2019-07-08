@@ -226,8 +226,11 @@ function createHouse($rooms=[], $images = [])
 			unset($image['title']);
 		}
 		else $title = 'пустой title';
+		
+		if (array_key_exists('month', $image)) $image['month'] = getNumberMonth($image['month']);
 
 		if (!array_key_exists($title, $dinamics)) $dinamics[$title] = [];
+		
 		$dinamics[$title][] = $image;
 	}
 
@@ -259,6 +262,7 @@ function createHouse($rooms=[], $images = [])
 
 	foreach ($dinamics as $name => $image)
 	{
+		if (array_key_exists('month', $image)) $image['month'] = getNumberMonth($image['month']);
 		$offers[$i] = [
 			'build-name' => $name
 			,'images' => ['image'=>$image]
