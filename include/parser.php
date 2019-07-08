@@ -147,3 +147,118 @@ $workDir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 		}
 		return 0;
 	}
+
+
+function makeRooms($rooms=[], $images = [])
+	{
+		$zhks = [];
+		$dinamics = [];
+		$korps = [];
+		$baseid = [];
+
+		foreach ($rooms as $key => $room)
+		{ 
+			if (array_key_exists('title', $room)) 
+			{
+				$title = $room['title'];
+				unset($room['title']);
+			}
+			else $title = 'ЖК';
+			if (array_key_exists('korp', $room)) 
+			{
+				$korp = $room['korp'];
+				unset($room['korp']);
+			}
+			else $korp = '1';
+
+			$title = trim($title);
+			$korp = trim($korp);
+
+			if (!array_key_exists($title, $zhks)) $zhks[$title] = [];
+			if (!array_key_exists($korp, $zhks[$title])) $zhks[$title][$korp] = [];
+
+			if (array_key_exists('floor', $room)) $floor = (int)$room['floor'];
+			else $floor = 0;
+
+			if (array_key_exists('num', $room) && $room['num'] != 's') $num = (int)$room['num'];
+			else $num = 0;
+
+			if (array_key_exists('square', $room)) $square = (float)$room['square'];
+			else $square = 0;
+
+			$id = (int)filter_var(''.(int)$korp.$num.$floor.$square);
+
+			while(1)
+			{
+				if (in_array($id,$baseid)) 
+				{
+					$id++;
+					continue;
+				}
+				$baseid[] = $id;
+				break;
+			}
+
+			$room['id'] = $id;
+			$room = ['#attr' => ['offer_id'=>$id]] + $room;
+
+			$zhks[$title][$korp][] = $room;
+			ksort($zhks[$title]);
+		}
+
+		foreach ($images as $key => $image)
+		{ 
+			if (array_key_exists('title', $image)) 
+			{
+				$title = $image['title'];
+				unset($image['title']);
+			}
+			else $title = 'ЖК';
+
+			if (!array_key_exists($title, $dinamics)) $dinamics[$title] = [];
+			$dinamics[$title][] = $image;
+		}
+
+		
+		$offers = [];
+		$i = 0;
+
+		foreach ($zhks as $name => $korps)
+		{
+			$rooms = [];
+			foreach ($korps as $nameKorp => $korpData)
+			{
+				$rooms[] = [
+					'num' => $nameKorp
+					,'rooms' => ['room' => $korpData]
+				];
+			}
+			$offers[$i] = [
+				'build-name' => $name
+				,'korps' => ['korp'=>$rooms]
+			];
+			if (array_key_exists($name, $dinamics)) 
+			{
+				$offers[$i]['images'] = $dinamics[$name];
+				unset($dinamics[$name]);
+			}
+			$i++;
+		}
+
+		foreach ($dinamics as $name => $image)
+		{
+			$offers[$i] = [
+				'build-name' => $name
+				,'images' => ['image'=>$image]
+			];
+			$i++;
+		}
+
+		$data = [
+			'offers' => [
+				'offer' => $offers
+			]
+		];
+
+		return $data;
+	}
