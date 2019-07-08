@@ -1,12 +1,23 @@
 //<?php
-$workDir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
-$baseXMLFile = 'base.xml';
-if (isset($_GET['open']) && file_exists($workDir . $baseXMLFile)) {
+$__workDir__ = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
+$__baseXMLFile__ = 'base.xml';
+$__XMLdata__ = '';
+$__enablesave__ = true;
+if (isset($_GET['open']) && file_exists($__workDir__ . $__baseXMLFile__)) {
 	header('Content-type: text/xml');
-	header('Date-update: ' . fileatime($workDir . $baseXMLFile));
-	echo file_get_contents($workDir . $baseXMLFile);
+	header('Date-update: ' . fileatime($__workDir__ . $__baseXMLFile__));
+	echo file_get_contents($__workDir__ . $__baseXMLFile__);
+	$__enablesave__ = false;
 	die;
 }
+
+function __exittoxmlsave__()
+{
+	global $__workDir__, $__baseXMLFile__, $__XMLdata__, $__enablesave__;
+	if ($__enablesave__) file_put_contents($__workDir__ . $__baseXMLFile__, $__XMLdata__);
+}
+
+register_shutdown_function('__exittoxmlsave__');
 
 function toXML($object)
 {
@@ -149,7 +160,7 @@ function getNumberMonth($month)
 }
 
 
-function makeRooms($rooms=[], $images = [])
+function createHouse($rooms=[], $images = [])
 {
 	$zhks = [];
 	$dinamics = [];
