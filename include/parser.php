@@ -1,4 +1,4 @@
-
+//<?php
 $workDir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR;
 	$baseXMLFile = 'base.xml';
 	if (isset($_GET['open']) && file_exists($workDir . $baseXMLFile)) {
