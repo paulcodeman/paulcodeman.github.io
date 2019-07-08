@@ -162,6 +162,7 @@ function getNumberMonth($month)
 
 function createHouse($rooms=[], $images = [])
 {
+	global $__XMLdata__;
 	$zhks = [];
 	$dinamics = [];
 	$korps = [];
