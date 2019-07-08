@@ -175,7 +175,7 @@ function createHouse($rooms=[], $images = [])
 			$title = $room['title'];
 			unset($room['title']);
 		}
-		else $title = 'ЖК';
+		else $title = 'пустой title';
 		if (array_key_exists('korp', $room)) 
 		{
 			$korp = $room['korp'];
