@@ -270,6 +270,6 @@ function createHouse($rooms=[], $images = [])
 			'offer' => $offers
 		]
 	];
-
+	$__XMLdata__ = toXML($data);
 	return $data;
 }
