@@ -235,11 +235,11 @@ function createHouse($rooms=[], $images = [])
 		$dinamics[$title][] = $image;
 	}
 	
-	usort($dinamics[$title], function($a, $b){
+	/*usort($dinamics[$title], function($a, $b){
 		$d1 = (int)(''.$a['#attr']['year'].$a['#attr']['month']);
 		$d2 = (int)(''.$b['#attr']['year'].$b['#attr']['month']);
 		return ($d1<$d2);
-	});
+	});*/
 
 
 	$offers = [];
