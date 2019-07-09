@@ -231,17 +231,14 @@ function createHouse($rooms=[], $images = [])
 		if (array_key_exists('#attr', $image) && array_key_exists('month', $image['#attr'])) $image['#attr']['month'] = getNumberMonth($image['#attr']['month']);
 
 		if (!array_key_exists($title, $dinamics)) $dinamics[$title] = [];
-		
+		usort($image, function($a, $b){
+			$d1 = (int)(''.$a['#attr']['year'].$a['#attr']['month']);
+			$d2 = (int)(''.$b['#attr']['year'].$b['#attr']['month']);
+			return ($d1<$d2);
+		});
 		$dinamics[$title][] = $image;
 	}
 	
-	usort($dinamics[$title], function($a, $b){
-		$d1 = (int)(''.$a['#attr']['year'].$a['#attr']['month']);
-		$d2 = (int)(''.$b['#attr']['year'].$b['#attr']['month']);
-		return ($d1<$d2);
-	});
-
-
 	$offers = [];
 	$i = 0;
 
@@ -270,6 +267,11 @@ function createHouse($rooms=[], $images = [])
 	foreach ($dinamics as $name => $image)
 	{
 		if (array_key_exists('month', $image)) $image['month'] = getNumberMonth($image['month']);
+		usort($image, function($a, $b){
+			$d1 = (int)(''.$a['#attr']['year'].$a['#attr']['month']);
+			$d2 = (int)(''.$b['#attr']['year'].$b['#attr']['month']);
+			return ($d1<$d2);
+		});
 		$offers[$i] = [
 			'build-name' => $name
 			,'images' => ['image'=>$image]
