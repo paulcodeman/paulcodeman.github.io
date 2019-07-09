@@ -231,6 +231,12 @@ function createHouse($rooms=[], $images = [])
 
 		if (!array_key_exists($title, $dinamics)) $dinamics[$title] = [];
 		
+		usort($image, function($a, $b){
+			$d1 = (int)(''.$a['year'].$a['month']);
+			$d2 = (int)(''.$b['year'].$b['month']);
+			return ($d1<$d2);
+		});
+		
 		$dinamics[$title][] = $image;
 	}
 
