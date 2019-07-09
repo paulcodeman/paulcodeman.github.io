@@ -232,14 +232,14 @@ function createHouse($rooms=[], $images = [])
 
 		if (!array_key_exists($title, $dinamics)) $dinamics[$title] = [];
 		
-		/*usort($image, function($a, $b){
-			$d1 = (int)(''.$a['#attr']['year'].$a['#attr']['month']);
-			$d2 = (int)(''.$b['#attr']['year'].$b['#attr']['month']);
-			return ($d1<$d2);
-		});*/
-		
 		$dinamics[$title][] = $image;
 	}
+	
+	usort($dinamics[$title], function($a, $b){
+		$d1 = (int)(''.$a['#attr']['year'].$a['#attr']['month']);
+		$d2 = (int)(''.$b['#attr']['year'].$b['#attr']['month']);
+		return ($d1<$d2);
+	});
 
 
 	$offers = [];
