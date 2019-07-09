@@ -161,13 +161,24 @@ function getNumberMonth($month)
 }
 
 
-function createHouse($rooms=[], $images = [])
+function createHouse($rooms=[], $images = [], $live = true)
 {
 	global $__XMLdata__;
 	$zhks = [];
 	$dinamics = [];
 	$korps = [];
 	$baseid = [];
+	
+	if ($live)
+	{
+		$tags = 'rooms';
+		$tag = 'room';
+	}
+	else 
+	{
+		$tags = 'spaces';
+		$tag = 'space';
+	}
 
 	foreach ($rooms as $key => $room)
 	{ 
