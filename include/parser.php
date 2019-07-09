@@ -115,6 +115,7 @@ function toXML($object)
 
 function getNumberMonth($month)
 {
+	if (gettype($month) != 'string') return $month;
 	$month = substr($month,0,6);
 	switch($month)
 	{
