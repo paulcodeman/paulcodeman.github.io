@@ -228,7 +228,7 @@ function createHouse($rooms=[], $images = [])
 		}
 		else $title = 'пустой title';
 		
-		if (array_key_exists('#attr', $image) && array_key_exists('month', $image['#attr'])) $image['month'] = getNumberMonth($image['month']);
+		if (array_key_exists('#attr', $image) && array_key_exists('month', $image['#attr'])) $image['#attr']['month'] = getNumberMonth($image['#attr']['month']);
 
 		if (!array_key_exists($title, $dinamics)) $dinamics[$title] = [];
 		
