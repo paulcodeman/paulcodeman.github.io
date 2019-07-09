@@ -240,7 +240,7 @@ function createHouse($rooms=[], $images = [])
 		if ($month2 <= 9) $month2 = '0'.$month2;
 		$d1 = (int)(''.$a['#attr']['year'].$month1);
 		$d2 = (int)(''.$b['#attr']['year'].$month2);
-		return ($d1<$d2);
+		return ($a['#attr']['year']<$b['#attr']['year']);
 	});
 	
 	$offers = [];
