@@ -270,7 +270,7 @@ function createHouse($rooms=[], $images = [], $live = true)
 		];
 		if (array_key_exists($name, $dinamics)) 
 		{
-			$offers[$i]['images'] = ['image'=>$image];
+			$offers[$i]['images'] = ['image'=>$dinamics[$name]];
 			unset($dinamics[$name]);
 		}
 		$i++;
@@ -281,7 +281,7 @@ function createHouse($rooms=[], $images = [], $live = true)
 		if (array_key_exists('month', $image)) $image['month'] = getNumberMonth($image['month']);
 		$offers[$i] = [
 			'build-name' => $name
-			,'images' => ['image'=>$image]
+			,'images' => ['image'=>$dinamics[$name]]
 		];
 		$i++;
 	}
