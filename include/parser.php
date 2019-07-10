@@ -206,13 +206,17 @@ function createHouse($rooms=[], $images = [], $live = true)
 
 		if (array_key_exists('num', $room) && $room['num'] != 's') $num = (int)$room['num'];
 		else $num = 0;
+		
+		if (array_key_exists('price', $room)){
+			$room['price'] = (int)filter_var($room['price'], FILTER_VALIDATE_INT);
+		}
 
 		if (array_key_exists('square', $room)) $square = (float)$room['square'];
 		else $square = 0;
 
 		if (!array_key_exists('id', $room))
 		{
-			$id = (int)filter_var(''.(int)$korp.$num.$floor.$square);
+			$id = (int)filter_var(''.$korp.$num.$floor.$square, FILTER_VALIDATE_INT);
 			while(1)
 			{
 				if (in_array($id,$baseid)) 
