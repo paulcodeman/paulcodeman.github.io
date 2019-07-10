@@ -270,7 +270,7 @@ function createHouse($rooms=[], $images = [], $live = true)
 		];
 		if (array_key_exists($name, $dinamics)) 
 		{
-			$offers[$i]['images'] = $dinamics[$name];
+			$offers[$i]['images'] = ['image'=>$image];
 			unset($dinamics[$name]);
 		}
 		$i++;
