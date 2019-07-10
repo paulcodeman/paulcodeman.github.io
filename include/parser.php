@@ -261,7 +261,7 @@ function createHouse($rooms=[], $images = [], $live = true)
 		{
 			$rooms[] = [
 				'num' => $nameKorp
-				,'rooms' => ['room' => $korpData]
+				,$tags => [$tag => $korpData]
 			];
 		}
 		$offers[$i] = [
