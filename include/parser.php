@@ -19,6 +19,23 @@ function __exittoxmlsave__()
 
 register_shutdown_function('__exittoxmlsave__');
 
+function postData($url, $postdata)
+	{
+		/*$postdata = http_build_query($data);*/
+
+		$opts = array('http' =>
+				array(
+						'method'  => 'POST',
+						//'header'  => 'Content-Type: application/json'."\r\n".'X-Requested-With: XMLHttpRequest',
+						'content' => $postdata
+				)
+		);
+
+		$context  = stream_context_create($opts);
+
+		return @file_get_contents($url, false, $context);
+	}
+
 function toXML($object)
 {
 	global $__X__;
