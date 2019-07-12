@@ -161,7 +161,7 @@ function getNumberMonth($month)
 }
 
 
-function createHouse($rooms=[], $images = [], $live = true)
+function createHouse($rooms=[], $images = [], $atags = ['rooms','room'])
 {
 	global $__XMLdata__;
 	$zhks = [];
@@ -169,16 +169,8 @@ function createHouse($rooms=[], $images = [], $live = true)
 	$korps = [];
 	$baseid = [];
 	
-	if ($live)
-	{
-		$tags = 'rooms';
-		$tag = 'room';
-	}
-	else 
-	{
-		$tags = 'spaces';
-		$tag = 'space';
-	}
+	$tags = $atags[0];
+	$tag = $atags[1];
 
 	foreach ($rooms as $key => $room)
 	{ 
@@ -201,17 +193,20 @@ function createHouse($rooms=[], $images = [], $live = true)
 		if (!array_key_exists($title, $zhks)) $zhks[$title] = [];
 		if (!array_key_exists($korp, $zhks[$title])) $zhks[$title][$korp] = [];
 
-		if (array_key_exists('floor', $room)) $floor = (int)$room['floor'];
+		if (array_key_exists('floor', $room)) $room['floor'] = $floor = (int)$room['floor'];
 		else $floor = 0;
 
-		if (array_key_exists('num', $room) && $room['num'] != 's') $num = (int)$room['num'];
+		if (array_key_exists('num', $room) && $room['num'] != 's') $room['num']= $num = (int)$room['num'];
 		else $num = 0;
 		
 		if (array_key_exists('price', $room)){
 			$room['price'] = (int)filter_var($room['price'], FILTER_VALIDATE_INT);
 		}
 
-		if (array_key_exists('square', $room)) $square = (float)$room['square'];
+		if (array_key_exists('square', $room)) $square = $room['square'] = (float)$room['square'];
+		else $square = 0;
+		
+		if (array_key_exists('area', $room)) $square = $room['area'] = (float)$room['area'];
 		else $square = 0;
 
 		if (!array_key_exists('id', $room))
