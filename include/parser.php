@@ -262,11 +262,14 @@ function createHouse($rooms=[], $images = [], $atags = ['rooms','room'])
 		$dinamics[$title][] = $image;
 	}
 	
-	usort($dinamics[$title], function($a, $b){
-		$month1 = $a['#attr']['year']*100+$a['#attr']['month']; 
-		$month2 = $b['#attr']['year']*100+$b['#attr']['month'];
-		return ($month1<$month2);
-	});
+	if (count($images))
+	{
+		usort($dinamics[$title], function($a, $b){
+			$month1 = $a['#attr']['year']*100+$a['#attr']['month']; 
+			$month2 = $b['#attr']['year']*100+$b['#attr']['month'];
+			return ($month1<$month2);
+		});
+	}
 	
 	$offers = [];
 	$i = 0;
