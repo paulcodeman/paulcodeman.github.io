@@ -239,8 +239,7 @@ function createHouse($rooms=[], $images = [], $atags = ['rooms','room'])
 				$baseid[] = $id;
 				break;
 			}
-			$room['id'] = $id;
-			$room = ['#attr' => ['offer_id'=>$id]] + $room;
+			$room = ['#attr' => ['offer_id'=>$id], 'id' => $id] + $room;
 		}
 
 		$zhks[$title][$korp][] = $room;
