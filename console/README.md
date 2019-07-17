@@ -16,4 +16,4 @@ Attributes:
 3) Object.color = color - allows to use global color for all text
 4) Object.delay = integer - allows to change time blink cursor
 
-Url for see https://paulcodeman.github.io/console/index.html
+## Url for see https://paulcodeman.github.io/console
