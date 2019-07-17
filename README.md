@@ -1,1 +1,1 @@
-Web site
+Example pages
