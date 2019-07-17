@@ -1,5 +1,5 @@
 # Console
-## See https://paulcodeman.github.io/console
+## [See example](https://paulcodeman.github.io/console)
 ### Methods:
 ```javascript
 1) Object.print(text [,color text, background color, bold text]) - print text in console other styles
