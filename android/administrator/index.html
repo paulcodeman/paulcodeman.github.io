@@ -1,0 +1,670 @@
+<html>
+	<head>
+		<title>Администратор</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			@font-face 
+			{
+				font-family: Droid; /* Имя шрифта */
+				src: url(DroidSans.ttf); /* Путь к файлу со шрифтом */
+			}
+			
+			@font-face 
+			{
+				font-family: DroidBold; /* Имя шрифта */
+				src: url(DroidSans-Bold.ttf); /* Путь к файлу со шрифтом */
+			}
+		
+			body
+			{
+				-moz-user-select: none;
+				-khtml-user-select: none;
+				user-select: none;  
+				font-family:Droid;
+				cursor:default;
+				margin:0px;
+				padding:0px;
+				overflow:hidden;
+			}
+			div
+			{
+				outline:none;
+			}
+			div.pointerOkey
+			{
+				width:0px;
+				height:0px;
+				padding:8px;
+				border-radius:50%;
+				background:green;
+				cursor:pointer;
+				position:relative;
+				left:0px;
+				top:0px;
+				box-shadow: 0 3px 7px rgba(0,64,0,0.5);
+				opacity:0.85;
+			}
+			
+			div.pointerError
+			{
+				width:0px;
+				height:0px;
+				padding:8px;
+				border-radius:50%;
+				background:red;
+				cursor:pointer;
+				position:relative;
+				left:0px;
+				top:0px;
+				box-shadow: 0 3px 7px rgba(64,0,0,0.5);
+				opacity:0.85;
+			}
+			
+			div.popup
+			{
+				
+			}
+			
+			div.containerX
+			{
+				overflow-x:auto;
+				overflow-y: hidden;
+				text-align:center;
+				margin:auto;
+				white-space: nowrap;
+				height:112px;
+			}
+			div.containerX div.box
+			{
+				width:100px;
+				height:100px;
+				display:inline-block;
+				border:1px solid #999;
+				border-bottom-left-radius:5px;
+				border-bottom-right-radius:5px;
+				cursor:pointer;
+				background-size:cover;
+				box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+				-webkit-tap-highlight-color: rgba(255,255,255,0.2);
+			}
+			div.containerX div.box.active
+			{
+				border:1px solid #000;
+				box-shadow: 0 4px 5px rgba(0,0,0,0.3);
+			}
+			div.containerX div.box div.title
+			{
+				padding:5px;
+				background:#CCC;
+				text-align:center;
+				font-family:DroidBold;
+			}
+			
+			div.containerX div.box.active div.title
+			{
+				background:#AAA;
+			}
+			
+			div.containerX div.box:active
+			{
+				
+			}
+			
+			div.containerY
+			{
+				overflow-x:hidden;
+				overflow-y: auto;
+				text-align:center;
+				margin:0px;
+				padding:0px;
+				white-space: wrap;
+				width:120px;
+				float:right;
+				position:absolute;
+				left:calc(100% - 120px);
+				top:38px;
+				height:calc(100% - 40px);
+			}
+			div.containerY div.box
+			{
+				width:100px;
+				height:100px;
+				display:inline-block;
+				border:1px solid #999;
+				border-top:none;
+				border-bottom-left-radius:5px;
+				border-bottom-right-radius:5px;
+				cursor:pointer;
+				background-size:cover;
+				-webkit-tap-highlight-color: rgba(255,255,255,0.2);
+			}
+			div.containerY div.box.active
+			{
+				border:1px solid #000;
+				border-top:none;
+			}
+			div.containerY div.box div.title
+			{
+				padding:5px;
+				background:#CCC;
+				text-align:center;
+				font-family:DroidBold;
+			}
+			
+			div.containerY div.box.active div.title
+			{
+				background:#AAA;
+			}
+			
+			div.containerY div.box:active
+			{
+				
+			}
+			
+			
+			div.containerFloor
+			{
+				text-align:center;
+				floor:left;
+				height:calc(100% - 160px);
+			}
+			div.containerFloor div.title
+			{
+				font-family:DroidBold;
+			}
+			div.containerFloor div.map
+			{
+				overflow:auto;
+				width:100%;
+				height:100%;
+			}
+			div.containerFloor div.map div.floor
+			{
+				background-size:contain;
+				width:100%;
+				height:100%;
+				background-repeat:no-repeat;
+				background-position:50% 50%;
+				display:none;
+			}
+			div.containerFloor div.map div.floor.first
+			{
+				display:block;
+			}
+			div#dateCurrent
+			{
+				font-family:DroidBold;
+				font-size:16px;
+			}
+			div.dateNav
+			{
+				font-family:DroidBold;
+				font-size:16px;
+				display:inline-block;
+			}
+			div.settings
+			{
+				background-repeat:no-repeat;
+				background-position:50% 50%;
+				background-size:contain;
+				background-image:url(settings.svg);
+				position:fixed;
+				right:0px;
+				top:0px;
+				margin:5px;
+				padding:13px;
+			}
+			div.layout
+			{
+				width:100%;
+				height:100%;
+				overflow-x:hidden;
+				overflow-y:auto;
+				display:none;
+			}
+			div.layout.show
+			{
+				display:block;
+			}
+			div.layout div.title
+			{
+				text-align:center;
+				border-bottom:1px solid #000;
+			}
+			div.layout div.title div.closeLayout
+			{
+				float:right;
+				font-family:DroidBold;
+				padding:3px;
+				border:1px solid #000;
+			}
+			div.layout div.list
+			{
+				overflow-x:hidden;
+				overflow-y:auto;
+			}
+			div.layout div.list table
+			{
+				margin:auto;
+				margin-top:10px;
+				padding:1%;
+				width:100%;
+			}
+			
+			div.layout div.list table td
+			{
+				padding:1%;
+			}
+			
+			div.layout div.list table td input
+			{
+				border:none;
+				border-bottom:1px solid #AAA;
+				width:100%;
+				outline:none;
+				font-size:15px;
+			}
+			
+			div.layout div.list table td.all
+			{
+				font-family:DroidBold;
+			}
+			
+			button
+			{
+				background:#F0F0F0;
+				border:1px solid #CCC;
+				padding:5px;
+				float:right;
+				margin:2px;
+				outline:none;
+			}
+			button:active
+			{
+				background:#FFF;
+			}
+		</style>
+		<script>
+		
+			(function()
+			{
+				var array_fnc = {},timeout=false;
+				Element.prototype.ondbltap = null;
+				Object.defineProperty(Element.prototype, "ondbltap",
+				{
+					get: function() 
+					{
+						return (array_fnc[this]==undefined)?null:array_fnc[this][0];
+					}
+					,set: function(fnc)
+					{
+						if(array_fnc[this]==undefined)var fnc_evn = function()
+						{
+							if(!timeout) timeout = setTimeout(function()
+							{
+								timeout = null;
+							},300);
+							else
+							{
+								clearTimeout(timeout); //stop single tap callback
+								timeout=null;
+								fnc();
+							}
+							this.addEventListener('click',fnc_evn);
+						}
+
+						array_fnc[this] = [fnc,fnc_evn];
+						
+					}
+				});
+			})();
+		
+			var arrayMonth = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+            var horizontalPanel = false;
+			var date = new Date();
+			var currentMonth = date.getMonth();
+			var currentYear = date.getFullYear();
+			var currentDate = arrayMonth[currentMonth]+' '+currentYear;
+			var offsetXY = 0;
+			var dbPointers = [],dbIP = 0;
+			var floorData = [0,1.4141,0.93,0,0,0],fdCount=0;
+			function addPointer(floor,x,y)
+			{
+				var pointer = document.createElement("DIV");
+				pointer.className = 'pointerOkey';
+				pointer.style.left = backOFloor.offsetWidth/2 - floorData[floor]*backOFloor.offsetHeight/2 * x;
+				pointer.style.top = backOFloor.offsetHeight/2 * y;
+				document.getElementById("floor"+floor).appendChild(pointer);
+				pointer.onclick = function()
+				{
+					addUser(floor,dbIP);
+				}
+				dbPointers[dbIP++] = [pointer,x,y,floorData[floor]];
+				return pointer;
+			}
+			
+			function setCookie(name, value, options)
+			{
+			  options = options || {};
+
+			  var expires = options.expires;
+
+			  if (typeof expires == "number" && expires) {
+				var d = new Date();
+				d.setTime(d.getTime() + expires * 1000);
+				expires = options.expires = d;
+			  }
+			  if (expires && expires.toUTCString) {
+				options.expires = expires.toUTCString();
+			  }
+
+			  value = encodeURIComponent(value);
+
+			  var updatedCookie = name + "=" + value;
+
+			  for (var propName in options) {
+				updatedCookie += "; " + propName;
+				var propValue = options[propName];
+				if (propValue !== true) {
+				  updatedCookie += "=" + propValue;
+				}
+			  }
+
+			  document.cookie = updatedCookie;
+			}
+			
+			function getCookie(name)
+			{
+			  var matches = document.cookie.match(new RegExp(
+				"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+			  ));
+			  return matches ? decodeURIComponent(matches[1]) : undefined;
+			}
+
+			var backSelect = null, backOFloor;
+			
+			function main()
+			{
+				
+				//point1.onclick = function()
+				//{
+					
+				//}
+				//offsetX = backOFloor.offsetWidth;
+				
+				var listBoxMap = document.getElementsByClassName('box');
+				var listLength = listBoxMap.length;
+				var i =0,o;
+				backSelect = document.getElementById("firstFloor");
+				document.getElementById('dateCurrent').innerText = currentDate;
+				while(i<listLength)
+				{
+					var oMap = document.createElement('DIV');
+					if(!i)
+					{
+						oMap.className = 'floor first';
+						backOFloor = oMap;
+					}
+					else oMap.className = 'floor';
+					document.getElementById('map').appendChild(oMap);
+					o = listBoxMap[i++];
+					oMap.id = 'floor'+i;
+					oMap.ongesturechange = function()
+					{
+						gesture(event);
+					}
+					oMap.ondblclick = function()
+					{
+						plusSizeMap();
+					}
+					oMap.ongestureend = function()
+					{
+						gestureend(event);
+					}
+
+					var src = "floor"+i+".svg";
+					oMap.style.backgroundImage = 'url('+src+')';
+					o.onclick = selectFloor;
+					o.setAttribute('name','floor'+i);
+					o.style.backgroundImage = 'url('+src+')';
+					
+					switch(i)
+					{
+						case 1:
+							var point1 = addPointer(i,0.35,0.8);
+							var point2 = addPointer(i,-0.35,0.5);
+						break;
+						case 2:
+							var point1 = addPointer(i,0,1.3);
+							var point2 = addPointer(i,0.3,0.5);
+						break;
+					}
+				}
+				horizontalPanel = document.body.offsetWidth>document.body.offsetHeight;
+                updatePanel();
+				updatePointers();
+			}
+			window.onresize = function()
+			{
+                horizontalPanel = document.body.offsetWidth>document.body.offsetHeight;
+                updatePanel();
+				updatePointers();
+			}
+			var backNameFloor='floor1';
+			function selectFloor()
+			{
+				var name = this.getAttribute('name');
+				if (name == backNameFloor) return false;
+				backNameFloor = name;
+				var floor = document.getElementById('titleFloor');
+				var oFloor = document.getElementById(name);
+				if (oFloor != backOFloor)
+				{
+					oFloor.style.display = 'block';
+					backOFloor.style.display = 'none';
+				}
+				backOFloor = oFloor;
+				switch(name)
+				{
+					case 'floor1':
+						floor.innerText = "1 этаж";
+					break;
+					case 'floor2':
+						floor.innerText = "2 этаж";
+					break;
+					case 'floor3':
+						floor.innerText = "3 этаж";
+					break;
+				}
+				this.className = "box active";
+				if (backSelect != null && backSelect != this)backSelect.className = "box";
+				backSelect = this;
+				updatePointers();
+				return true;
+			}
+			function backDate()
+			{
+				if(--currentMonth < 0)
+				{
+					currentMonth = 11;
+					--currentYear;
+				}
+				currentDate = arrayMonth[--currentMonth]+' '+currentYear;
+				document.getElementById('dateCurrent').innerText = currentDate;
+			}
+			function nextDate()
+			{
+				if(++currentMonth > 11)
+				{
+					currentMonth = 0;
+					++currentYear;
+				}
+				currentDate = arrayMonth[currentMonth]+' '+currentYear;
+				document.getElementById('dateCurrent').innerText = currentDate;
+			}
+			
+			function showSettings()
+			{
+				document.getElementById('main').style.display = 'none';
+			}
+			
+			var sizeMaps = [];
+			function updatePointers()
+			{
+				var i = 0;
+				while(i<dbIP)
+				{
+					var o = dbPointers[i++];
+					var l = o[1];
+					var t = o[2];
+					var k = o[3];
+					var obj = o[0];
+					obj.style.left = backOFloor.offsetWidth/2 - k*backOFloor.offsetHeight/2 * l;
+					obj.style.top = backOFloor.offsetHeight/2 * t;
+				}
+			}
+			function plusSizeMap()
+			{
+				var id = backOFloor.id;
+				if(sizeMaps[id]==undefined)sizeMaps[id]=100;
+				sizeMaps[id]+=50;
+				backOFloor.style.width = backOFloor.style.height = sizeMaps[id]+'%';
+				updatePointers();
+			}
+			function minusSizeMap()
+			{
+				var id = backOFloor.id;
+				if(sizeMaps[id]==undefined)sizeMaps[id]=100;
+				if(sizeMaps[id]==100) return false;
+				sizeMaps[id]-=50;
+				backOFloor.style.width = backOFloor.style.height = sizeMaps[id]+'%';
+				updatePointers();
+			}
+			var eventX,eventY;
+			function getPositionEvent(event)
+			{
+				eventX = (event.layerX == undefined ? event.offsetX : event.layerX) + 1;
+				eventY = (event.layerY == undefined ? event.offsetY : event.layerY) + 1;
+			}
+			
+			function addUser(floor,id)
+			{
+				document.getElementById('main').style.display = 'none';
+				document.getElementById('addUser').style.display = 'block';
+			}
+			function closeLay(o)
+			{
+				o.style.display = 'none';
+				document.getElementById('main').style.display = 'block';
+			}
+            function updatePanel()
+            {
+                var panel = document.getElementById("conteinerFloor");
+				var map = document.getElementById("mapFloor");
+				if(horizontalPanel)
+				{
+					panel.className = "containerY";
+					map.style.width = "calc(100% - 110px)";
+					map.style.height = "calc(100% - 120px)";
+					map.style.margin = '0px';
+				}
+				else 
+				{
+					panel.className = "containerX";
+					map.style.width = "100%";
+					map.style.height = "calc(100% - 120px)";
+					map.style.margin = 'auto';
+				}
+            }
+			function gesture(event)
+			{
+				var scale = Math.round((event.scale*scale)*100)/100;
+				alert(scale); 
+			}
+			
+			function inputNumber(e) {
+			  e = e || event;
+
+			  if (e.ctrlKey || e.altKey || e.metaKey) return;
+
+			  var chr = getChar(e);
+
+			  // с null надо осторожно в неравенствах,
+			  // т.к. например null >= '0' => true
+			  // на всякий случай лучше вынести проверку chr == null отдельно
+			  if (chr == null) return;
+
+			  if (chr < '0' || chr > '9') {
+				return false;
+			  }
+			}
+		</script>
+	</head> 
+	<body onload="main();">
+	<!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter45279921 = new Ya.Metrika({ id:45279921, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/45279921" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+	
+		<div class="layout show" id="main">
+			<div style="position:fixed;left:5px;top:-2px;font-weight:600;font-size:35px;" onclick="plusSizeMap();">+</div>
+			<div style="position:fixed;left:40px;top:-12px;font-weight:600;font-size:45px;" onclick="minusSizeMap();">-</div>
+		<!--<div style="position:fixed;left:90px;top:10px;font-weight:600;font-size:14px;" onclick="addNewPoint(this);">Добавить</div>-->
+			<div class="containerFloor" id="mapFloor">
+				<!--<div class="dateNav" onclick="backDate();"><</div>&nbsp;-->
+				<div class="dateNav" id="dateCurrent"></div>
+				<!--<div onclick="nextDate();" class="dateNav">></div>-->
+				<div class="settings" onclick="showSettings();"></div>
+				
+				<div id="titleFloor" class="title">1 этаж</div>
+				<div id="map" class="map"></div>
+			</div>
+			<div id="conteinerFloor" class="containerX">
+				<div id="firstFloor" class="box active">
+					<div class="title">1 этаж</div>
+				</div>
+				<div class="box">
+					<div class="title">2 этаж</div>
+				</div>
+				<div class="box">
+					<div class="title">3 этаж</div>
+				</div>
+				<div class="box">
+					<div class="title">4 этаж</div>
+				</div>
+			</div>
+		</div>
+		<div class="layout" id="setting">
+			Настройки
+		</div>
+		<div class="layout" id="addUser">
+			<div class="title">
+				Добавить арендатора
+				<div class="closeLayout" onclick="closeLay(document.getElementById('addUser'));">X</div>
+			</div>
+			<div class="list">
+				<table>
+					<tr>
+						<td>Арендатор</td>
+						<td><input></input></td>
+					</tr>
+					<tr>
+						<td>Площадь</td>
+						<td><input onkeypress="return inputNumber(event);"></input></td>
+					</tr>
+					<tr>
+						<td>Цена за м<sup>2</sup></td>
+						<td><input></input></td>
+					</tr>
+					<tr>
+						<td>Связаться тел:</td>
+						<td><input></input></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td class="all">4700</td>
+					</tr>
+				</table>
+				<button onclick="closeLay(document.getElementById('addUser'));">Сохранить</button>
+			</div>
+		</div>
+	</body>
+</html>
