@@ -1,0 +1,47 @@
+@font-face {
+    font-family: ubuntu;
+    src: url(//www.cresoft.org/console/ubuntu.ttf);
+}
+div.console
+{
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  background: black;
+  color: white;
+  font-size:16px;
+  padding:0px;
+  font-family:"ubuntu";
+  overflow-y:auto;
+  width:600px;
+  height:300px;
+  resize: both;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  cursor: default;
+  outline: none;
+}
+div.console span.symbol
+{
+  height:18px;
+}
+
+div.console span.symbol.right
+{
+  border-right:1px dotted #FFF;
+  margin-right:-1px;
+
+}
+
+div.console span.symbol.left
+{
+  border-left:1px dotted #FFF;
+  margin-left:-1px;
+}
+
+div.console span.symbol.null
+{
+  border-left:1px dotted #FFF;
+  margin-left:-1px;
+}
