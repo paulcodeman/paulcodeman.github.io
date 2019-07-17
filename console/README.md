@@ -1,4 +1,5 @@
 # Console
+## See https://paulcodeman.github.io/console
 Methods:
 1) Object.print(text [,color text, background color, bold text]) - print text in console other styles
 2) Object.left() - allows to move left cursor
@@ -16,4 +17,3 @@ Attributes:
 3) Object.color = color - allows to use global color for all text
 4) Object.delay = integer - allows to change time blink cursor
 
-## Url for see https://paulcodeman.github.io/console
