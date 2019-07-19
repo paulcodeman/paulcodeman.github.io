@@ -221,9 +221,7 @@ function createHouse($rooms=[], $images = [], $atags = ['rooms','room'])
 		}
 
 		if (array_key_exists('square', $room)) $square = $room['square'] = (float)$room['square'];
-		else $square = 0;
-		
-		if (array_key_exists('area', $room)) $square = $room['area'] = (float)$room['area'];
+		elseif (array_key_exists('area', $room)) $square = $room['area'] = (float)$room['area'];
 		else $square = 0;
 
 		if (!array_key_exists('id', $room))
