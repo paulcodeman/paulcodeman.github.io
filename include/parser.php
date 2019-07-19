@@ -222,6 +222,9 @@ function createHouse($rooms=[], $images = [], $atags = ['rooms','room'])
 		if (array_key_exists('floor', $room)) $room['floor'] = $floor = (int)$room['floor'];
 		else $floor = 0;
 		
+		if (array_key_exists('sale_price', $room)) $room['sale_price'] = (int)preg_replace('#[^\d]#ui', '', $room['sale_price']);
+		else $floor = 0;
+		
 		if (array_key_exists('number', $room)) $number = $room['number'];
 		else $number = 0;
 
