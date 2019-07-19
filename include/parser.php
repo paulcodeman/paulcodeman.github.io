@@ -221,6 +221,9 @@ function createHouse($rooms=[], $images = [], $atags = ['rooms','room'])
 
 		if (array_key_exists('floor', $room)) $room['floor'] = $floor = (int)$room['floor'];
 		else $floor = 0;
+		
+		if (array_key_exists('number', $room)) $number = $room['number'];
+		else $number = 0;
 
 		if (array_key_exists('num', $room) && $room['num'] != 's') $room['num']= $num = (int)$room['num'];
 		else $num = 0;
@@ -235,7 +238,7 @@ function createHouse($rooms=[], $images = [], $atags = ['rooms','room'])
 
 		if (!array_key_exists('id', $room))
 		{
-			$id = (int)filter_var(''.$korp.$num.$floor.$square, FILTER_VALIDATE_INT);
+			$id = (int)preg_replace('#[^\d]#ui', '', ''.$korp.$number.$num.$floor.$square);
 			while(1)
 			{
 				if (in_array($id,$baseid)) 
