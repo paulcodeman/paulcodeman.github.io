@@ -11,6 +11,15 @@ if (isset($_GET['open']) && file_exists($__workDir__ . $__baseXMLFile__)) {
 	die;
 }
 
+function incID($id)
+{
+	static $__INCID__ = [];
+	$id = (int)$id;
+	if (in_array($id,$__INCID__)) return incID(++$id);
+	$__INCID__[] = $id;
+	return $id;
+}
+
 function __exittoxmlsave__()
 {
 	global $__workDir__, $__baseXMLFile__, $__XMLdata__, $__enablesave__;
