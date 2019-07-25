@@ -300,10 +300,13 @@ function createHouse($rooms=[], $images = [], $atags = ['rooms','room'])
 			'build-name' => $name
 			,'korps' => ['korp'=>$rooms]
 		];
-		if (array_key_exists($name, $dinamics)) 
-		{
-			$offers[$i]['images'] = ['image'=>$dinamics[$name]];
-			unset($dinamics[$name]);
+		foreach ($dinamics as $nameZHKdyn => $data) {
+			similar_text($nameZHKdyn,$name,$prc);
+			if($prc >= 50)
+			{
+				$offers[$i]['images'] = ['image'=>$dinamics[$nameZHKdyn]];
+				unset($dinamics[$nameZHKdyn]);
+			}
 		}
 		$i++;
 	}
