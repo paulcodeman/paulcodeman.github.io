@@ -117,7 +117,7 @@ function toXML($object)
 							}
 						break;
 						case 'integer':
-							if ($bTag != null)
+							if ($bTag != null && $data)
 							{
 								xmlwriter_start_element($__X__, $bTag);
 								convert($data, $bTag);
