@@ -63,7 +63,8 @@ function toXML($object)
 			case 'array':
 
 				foreach ($o as $attr => $data)
-				{					
+				{	
+					if (!$data) continue;
 					switch (gettype($attr))
 					{
 						case 'string':
