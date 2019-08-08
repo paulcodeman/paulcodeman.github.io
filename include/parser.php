@@ -303,7 +303,7 @@ function createHouse($rooms=[], $images = [], $atags = ['rooms','room'])
 		];
 		foreach ($dinamics as $nameZHKdyn => $data) {
 			similar_text($nameZHKdyn,$name,$prc);
-			if($prc >= 50)
+			if($prc >= 80)
 			{
 				$offers[$i]['images'] = ['image'=>$dinamics[$nameZHKdyn]];
 				unset($dinamics[$nameZHKdyn]);
