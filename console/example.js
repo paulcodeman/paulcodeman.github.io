@@ -1,6 +1,6 @@
 window.onload = function() // wait load page
 {
-  var c = new console(document.getElementById("console"));
+  var c = new Console(document.getElementById("console"));
   var apps = function(text)
   {
     if(text == '') { c.print("Введите команду: "); return; }
