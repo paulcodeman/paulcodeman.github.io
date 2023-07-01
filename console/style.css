@@ -41,25 +41,25 @@ div.console::-webkit-scrollbar-thumb
     background-color: #444;
 }
 
-div.console span.symbol
+div.console span.
 {
   height:18px;
 }
 
-div.console span.symbol.right
+div.console span.symbol-right
 {
   border-right:1px dotted #FFF;
   margin-right:-1px;
 
 }
 
-div.console span.symbol.left
+div.console span.symbol-left
 {
   border-left:1px dotted #FFF;
   margin-left:-1px;
 }
 
-div.console span.symbol.null
+div.console span.symbol-null
 {
   border-left:1px dotted #FFF;
   margin-left:-1px;
