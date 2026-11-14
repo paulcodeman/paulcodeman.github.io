@@ -1,2 +1,26 @@
-## Pages:
-### 1) [Example console](https://paulcodeman.github.io/console)
+# Pavel — HTML и JavaScript примеры
+
+Статический сайт с историческими браузерными примерами. Имя
+`paulcodeman.github.io` зарезервировано для личного GitHub Pages-сайта и сохранено.
+
+## Страницы и файлы
+
+- [Сайт](https://paulcodeman.github.io/) — существующий `index.html`, минимальная стартовая страница.
+- [Консоль](https://paulcodeman.github.io/console/) — пример в каталоге [console/](console/).
+- [android/](android/) — исторические материалы для Android.
+- [include/](include/) — вспомогательные ресурсы примеров.
+
+Исходники отдельного консольного виджета также сохранены в
+[Code Experiments](https://github.com/paulcodeman/code-experiments/tree/main/console/).
+Это не причина менять пути уже размещённых страниц данного сайта.
+
+## Локальный просмотр
+
+```sh
+python -m http.server 8000 --bind 127.0.0.1
+```
+
+Откройте `http://127.0.0.1:8000/console/` для примера. Manifest пакетного менеджера
+и отдельный обязательный этап сборки здесь отсутствуют. Совместимость старых
+примеров не гарантируется; это не новый production-сайт. При оформлении изменён
+только README, а страницы, внешние подключения и настройки публикации сохранены.
